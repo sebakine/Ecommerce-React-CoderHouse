@@ -30,28 +30,6 @@ npm run build    # build de producción
 npm run preview  # previsualizar el build
 
 
-## Estructura
-
-
-src/
-├── context/
-│   └── CartContext.jsx       # Estado global del carrito (add/remove/clear/totales) + Drawer
-├── components/
-│   ├── NavBar.jsx            # Nav fija + branding + categorías + menú hamburguesa móvil
-│   ├── CartWidget.jsx        # Ícono de carrito con badge (lee totalProducts)
-│   ├── CartDrawer.jsx        # Sidebar lateral con items, subtotales, total y checkout
-│   ├── Hero.jsx              # Sección de impacto (H1 + CTAs)
-│   ├── ItemListContainer.jsx # Pestañas de categoría + grid responsiva de productos
-│   ├── ProductCard.jsx       # Tarjeta con selector de cantidad y "Agregar"
-│   ├── Nosotros.jsx          # Sección narrativa con layout asimétrico
-│   └── Checkout.jsx          # Formulario validado + procesamiento + confirmación
-├── data/
-│   └── mockProducts.js       # Catálogo mock + categorías + formatPrice()
-├── App.jsx                   # Orquesta navegación shop ⇄ checkout + monta el Drawer
-├── index.css                 # Tailwind v4 + tokens de fuente + animaciones
-└── main.jsx                  # Entrada (envuelve la app en <CartProvider>)
-
-
 ##  Sistema de diseño
 
 Paleta cálida de especialidad sobre las escalas de Tailwind:
