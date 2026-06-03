@@ -1,41 +1,38 @@
-# ☕ CoffeeLink
+#  CoffeeLink
 
 E-commerce de café de especialidad — tostaduría premium y artículos de preparación.
 Frontend construido con **React + Vite + Tailwind CSS**, con una estética moderna,
 minimalista y premium (estilo apple-like) en una paleta cálida `stone` + `amber`.
 
-> Frontend 100% funcional e interactivo: estado global del carrito, drawer lateral,
-> catálogo dinámico por categorías y un flujo de checkout completo con confirmación.
-> Datos mock (sin backend real).
+Frontend 100% funcional e interactivo: estado global del carrito, drawer lateral,
 
----
 
-## 🛠️ Stack
 
-| Capa        | Tecnología                          |
-| ----------- | ----------------------------------- |
-| UI          | React 19 (componentes funcionales)  |
-| Build       | Vite 6                              |
-| Estilos     | Tailwind CSS v4 (plugin de Vite)    |
-| Iconos      | lucide-react                        |
-| Tipografía  | Fraunces (display) · Hanken Grotesk |
 
----
 
-## 🚀 Puesta en marcha
+##  Stack
 
-```bash
+
+UI          React 19 (componentes funcionales)
+Build       Vite 6                             
+Estilos     Tailwind CSS v4 (plugin de Vite)   
+Iconos      lucide-react                       
+Tipografía  Fraunces (display) · Hanken Grotesk
+
+
+
+##  Puesta en marcha
+
+
 npm install      # instalar dependencias
 npm run dev      # entorno de desarrollo (http://localhost:5173)
 npm run build    # build de producción
 npm run preview  # previsualizar el build
-```
 
----
 
-## 📂 Estructura
+## Estructura
 
-```
+
 src/
 ├── context/
 │   └── CartContext.jsx       # Estado global del carrito (add/remove/clear/totales) + Drawer
@@ -53,23 +50,9 @@ src/
 ├── App.jsx                   # Orquesta navegación shop ⇄ checkout + monta el Drawer
 ├── index.css                 # Tailwind v4 + tokens de fuente + animaciones
 └── main.jsx                  # Entrada (envuelve la app en <CartProvider>)
-```
 
----
 
-## 🧠 Decisiones de arquitectura
-
-- **Estado global con Context API** (`CartContext`): expone `addItem(item, qty)`,
-  `removeItem(id)`, `clearCart()`, `totalProducts()`, `totalPrice()` y el control de
-  apertura del Drawer. Un hook `useCart()` mantiene limpio el consumo.
-- **Navegación sin router**: `App` gestiona la vista (`shop` ⇄ `checkout`) y la categoría
-  activa, sincronizada con la NavBar. El Drawer se monta de forma global para animar
-  su entrada/salida con `transition-transform`.
-- **Imágenes**: URLs reales de Unsplash verificadas (HTTP 200), con `loading="lazy"`.
-
----
-
-## 🎨 Sistema de diseño
+##  Sistema de diseño
 
 Paleta cálida de especialidad sobre las escalas de Tailwind:
 
