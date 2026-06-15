@@ -1,69 +1,30 @@
-import { useState } from 'react'
-import { useCart } from './context/CartContext'
+import { Routes, Route } from 'react-router-dom'
 import NavBar from './components/NavBar'
-import Hero from './components/Hero'
+import Home from './components/Home'
 import ItemListContainer from './components/ItemListContainer'
-import Nosotros from './components/Nosotros'
+import ItemDetailContainer from './components/ItemDetailContainer'
 import Checkout from './components/Checkout'
+import NotFound from './components/NotFound'
 import CartDrawer from './components/CartDrawer'
 
 function App() {
-  const { closeDrawer } = useCart()
-  const [view, setView] = useState('shop')
-  const [activeCategory, setActiveCategory] = useState('all')
-
-  const scrollToSection = (id) => {
-    // Espera a que la sección esté montada antes de desplazar.
-    setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    }, 60)
-  }
-
-  const handleSelectCategory = (category) => {
-    setActiveCategory(category)
-    setView('shop')
-    scrollToSection('catalogo')
-  }
-
-  const handleNavNosotros = () => {
-    setView('shop')
-    scrollToSection('nosotros')
-  }
-
-  const handleGoHome = () => {
-    setView('shop')
-    setActiveCategory('all')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const handleCheckout = () => {
-    closeDrawer()
-    setView('checkout')
-    window.scrollTo({ top: 0 })
-  }
-
   return (
     <div className="flex min-h-screen flex-col bg-stone-50">
-      <NavBar
-        onSelectCategory={handleSelectCategory}
-        onNavNosotros={handleNavNosotros}
-        onGoHome={handleGoHome}
-      />
+      <NavBar />
 
       <main className="flex-1">
-        {view === 'shop' ? (
-          <>
-            <Hero />
-            <ItemListContainer
-              greeting="Descubrí el café de especialidad"
-              activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
-            />
-            <Nosotros />
-          </>
-        ) : (
-          <Checkout onBackToShop={handleGoHome} />
-        )}
+        <Routes>
+          {/* '/' : home con catálogo completo */}
+          <Route path="/" element={<Home />} />
+          {/* '/category/:id' : catálogo filtrado por categoría (ruta parametrizada única) */}
+          <Route path="/category/:id" element={<ItemListContainer />} />
+          {/* '/item/:id' : detalle de un producto */}
+          <Route path="/item/:id" element={<ItemDetailContainer />} />
+          {/* '/checkout' : finalizar compra */}
+          <Route path="/checkout" element={<Checkout />} />
+          {/* '*' : 404 de respaldo para enlaces rotos o inexistentes */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
 
       <footer className="border-t border-stone-200 bg-stone-50">
@@ -75,7 +36,8 @@ function App() {
         </div>
       </footer>
 
-      <CartDrawer onCheckout={handleCheckout} />
+      {/* El carrito vive fuera de las rutas para persistir en toda la navegación. */}
+      <CartDrawer />
     </div>
   )
 }

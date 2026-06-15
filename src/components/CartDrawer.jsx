@@ -1,10 +1,18 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ShoppingBag, Trash2, X } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import { formatPrice } from '../data/mockProducts'
 
-function CartDrawer({ onCheckout }) {
+function CartDrawer() {
   const { items, removeItem, clearCart, totalPrice, isDrawerOpen, closeDrawer } = useCart()
+  const navigate = useNavigate()
+
+  // Cierra el drawer y navega al checkout sin recargar la página.
+  const handleCheckout = () => {
+    closeDrawer()
+    navigate('/checkout')
+  }
 
   // Bloquea el scroll de fondo y permite cerrar con la tecla Escape.
   useEffect(() => {
@@ -114,7 +122,7 @@ function CartDrawer({ onCheckout }) {
 
             <button
               type="button"
-              onClick={onCheckout}
+              onClick={handleCheckout}
               className="w-full rounded-full bg-amber-800 px-6 py-3.5 text-sm font-semibold text-stone-50
                          shadow-sm transition-all duration-300 ease-in-out hover:bg-amber-900 hover:shadow-lg"
             >

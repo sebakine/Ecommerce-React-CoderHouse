@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, CheckCircle2, Loader2, ShoppingBag } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import { formatPrice } from '../data/mockProducts'
@@ -34,8 +35,11 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_REGEX = /^[0-9\s+()-]{7,}$/
 const INITIAL_FORM = { nombre: '', telefono: '', email: '', confirmEmail: '' }
 
-function Checkout({ onBackToShop }) {
+function Checkout() {
   const { items, totalPrice, clearCart } = useCart()
+  const navigate = useNavigate()
+  // Vuelve al catálogo navegando con el router (sin recargar).
+  const onBackToShop = () => navigate('/')
   const [form, setForm] = useState(INITIAL_FORM)
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle')
